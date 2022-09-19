@@ -20,7 +20,7 @@ import {
 } from '@ethersproject/providers'
 import { Provider } from '@nestjs/common'
 import { ConnectionInfo } from 'ethers/lib/utils'
-import { defer, lastValueFrom } from 'rxjs'
+import { defer } from 'rxjs'
 import { ETHERS_MODULE_OPTIONS, MAINNET_NETWORK, BINANCE_NETWORK, BINANCE_TESTNET_NETWORK } from './ethers.constants'
 import { EthersContract } from './ethers.contract'
 import { EthersModuleOptions, EthersModuleAsyncOptions } from './ethers.interface'
@@ -152,7 +152,7 @@ export function createEthersProvider(options: EthersModuleOptions): Provider {
   return {
     provide: getEthersToken(options.token),
     useFactory: async (): Promise<BaseProvider | AbstractProvider> => {
-      return await lastValueFrom(defer(() => createBaseProvider(options)))
+      return (await defer(() => createBaseProvider(options)).toPromise())!
     },
   }
 }
@@ -161,7 +161,7 @@ export function createEthersAsyncProvider(token?: string): Provider {
   return {
     provide: getEthersToken(token),
     useFactory: async (options: EthersModuleOptions): Promise<BaseProvider | AbstractProvider> => {
-      return await lastValueFrom(defer(() => createBaseProvider(options)))
+      return (await defer(() => createBaseProvider(options)).toPromise())!
     },
     inject: [ETHERS_MODULE_OPTIONS],
   }
@@ -179,7 +179,7 @@ export function createContractProvider(token?: string): Provider {
   return {
     provide: getContractToken(token),
     useFactory: async (provider: AbstractProvider): Promise<EthersContract> => {
-      return await lastValueFrom(defer(async () => new EthersContract(provider)))
+      return (await defer(async () => new EthersContract(provider)).toPromise())!
     },
     inject: [getEthersToken(token)],
   }
@@ -189,7 +189,7 @@ export function createSignerProvider(token?: string): Provider {
   return {
     provide: getSignerToken(token),
     useFactory: async (provider: AbstractProvider): Promise<EthersSigner> => {
-      return await lastValueFrom(defer(async () => new EthersSigner(provider)))
+      return (await defer(async () => new EthersSigner(provider)).toPromise())!
     },
     inject: [getEthersToken(token)],
   }
