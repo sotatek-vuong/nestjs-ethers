@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createSignerProvider = exports.createContractProvider = exports.createAsyncOptionsProvider = exports.createEthersAsyncProvider = exports.createEthersProvider = exports.createBaseProvider = void 0;
 const bsc_1 = require("@ethers-ancillary/bsc");
+const kcc_1 = require("./kcc");
 const providers_1 = require("@ethersproject/providers");
 const rxjs_1 = require("rxjs");
 const ethers_constants_1 = require("./ethers.constants");
@@ -17,13 +18,26 @@ function validateBscNetwork(network) {
     }
     return [ethers_constants_1.BINANCE_NETWORK, ethers_constants_1.BINANCE_TESTNET_NETWORK].includes(network);
 }
+function validateKccNetwork(network) {
+    if (typeof network === 'number') {
+        return [ethers_constants_1.KUCOIN_NETWORK.chainId, ethers_constants_1.KUCOIN_TESTNET_NETWORK.chainId].includes(network);
+    }
+    if (typeof network === 'string') {
+        return [ethers_constants_1.KUCOIN_NETWORK.name, ethers_constants_1.KUCOIN_TESTNET_NETWORK.name].includes(network);
+    }
+    return [ethers_constants_1.KUCOIN_NETWORK, ethers_constants_1.KUCOIN_TESTNET_NETWORK].includes(network);
+}
 async function createBaseProvider(options) {
-    var _a;
-    const { network = ethers_constants_1.MAINNET_NETWORK, alchemy, etherscan, infura, pocket, cloudflare = false, bscscan, custom, quorum = 1, waitUntilIsConnected = true, useDefaultProvider = true, } = options;
+    var _a, _b;
+    const { network = ethers_constants_1.MAINNET_NETWORK, alchemy, etherscan, infura, pocket, cloudflare = false, bscscan, custom, kccscan, quorum = 1, waitUntilIsConnected = true, useDefaultProvider = true, } = options;
     let providerNetwork;
     const isBscNetwork = validateBscNetwork(network);
+    const isKccNetwork = !isBscNetwork && validateKccNetwork(network);
     if (isBscNetwork) {
         providerNetwork = (_a = (0, bsc_1.getNetwork)(network)) !== null && _a !== void 0 ? _a : undefined;
+    }
+    else if (isKccNetwork) {
+        providerNetwork = (_b = (0, kcc_1.getNetwork)(network)) !== null && _b !== void 0 ? _b : undefined;
     }
     else {
         providerNetwork = (0, providers_1.getNetwork)(network);
@@ -54,6 +68,9 @@ async function createBaseProvider(options) {
         if (bscscan) {
             providers.push(new bsc_1.BscscanProvider(providerNetwork, bscscan));
         }
+        if (kccscan) {
+            providers.push(new kcc_1.KccscanProvider(providerNetwork, kccscan));
+        }
         if (custom) {
             const customInfos = !Array.isArray(custom) ? [custom] : custom;
             customInfos.forEach((customInfo) => {
@@ -71,9 +88,15 @@ async function createBaseProvider(options) {
         }
         throw new Error('Error in provider creation. The property "useDefaultProvider" is false and the providers supplied are invalid.');
     }
-    if (useDefaultProvider && isBscNetwork) {
-        const bscConfig = bscscan ? { bscscan } : {};
-        return (0, bsc_1.getDefaultProvider)(providerNetwork, bscConfig);
+    if (useDefaultProvider) {
+        if (isBscNetwork) {
+            const bscConfig = bscscan ? { bscscan } : {};
+            return (0, bsc_1.getDefaultProvider)(providerNetwork, bscConfig);
+        }
+        else if (isKccNetwork) {
+            const kccConfig = kccscan ? { kccscan } : {};
+            return (0, kcc_1.getDefaultProvider)(providerNetwork, kccConfig);
+        }
     }
     return (0, providers_1.getDefaultProvider)(providerNetwork, {
         alchemy,

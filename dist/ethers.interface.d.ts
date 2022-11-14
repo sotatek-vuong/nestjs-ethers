@@ -16,6 +16,7 @@ export interface EthersModuleOptions extends Record<string, any> {
     network?: Networkish | undefined;
     alchemy?: string | undefined;
     etherscan?: string | undefined;
+    kccscan?: string | undefined;
     cloudflare?: boolean | undefined;
     infura?: InfuraProviderOptions | string | undefined;
     pocket?: PocketProviderOptions | string | undefined;

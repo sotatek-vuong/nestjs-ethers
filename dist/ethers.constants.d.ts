@@ -23,3 +23,5 @@ export declare const BNB_NETWORK: Network;
 export declare const BNB_TESTNET_NETWORK: Network;
 export declare const BINANCE_NETWORK: Network;
 export declare const BINANCE_TESTNET_NETWORK: Network;
+export declare const KUCOIN_NETWORK: Network;
+export declare const KUCOIN_TESTNET_NETWORK: Network;

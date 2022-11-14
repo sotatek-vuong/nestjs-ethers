@@ -1,7 +1,7 @@
 export { EthersModule } from './ethers.module';
 export { InjectEthersProvider, InjectContractProvider, InjectSignerProvider } from './ethers.decorators';
 export { InfuraProviderOptions, PocketProviderOptions, EthersModuleOptions, EthersModuleAsyncOptions, RandomWalletOptions, WordlistLike, } from './ethers.interface';
-export { MAINNET_NETWORK, ROPSTEN_NETWORK, TESTNET_NETWORK, CLASSIC_MORDOR_NETWORK, UNSPECIFIED_NETWORK, MORDEN_NETWORK, RINKEBY_NETWORK, KOVAN_NETWORK, GOERLI_NETWORK, CLASSIC_NETWORK, CLASSIC_MORDEN_NETWORK, CLASSIC_TESTNET_NETWORK, CLASSIC_KOTTI_NETWORK, XDAI_NETWORK, MATIC_NETWORK, MUMBAI_NETWORK, BNB_NETWORK, BNB_TESTNET_NETWORK, BINANCE_NETWORK, BINANCE_TESTNET_NETWORK, } from './ethers.constants';
+export { MAINNET_NETWORK, ROPSTEN_NETWORK, TESTNET_NETWORK, CLASSIC_MORDOR_NETWORK, UNSPECIFIED_NETWORK, MORDEN_NETWORK, RINKEBY_NETWORK, KOVAN_NETWORK, GOERLI_NETWORK, CLASSIC_NETWORK, CLASSIC_MORDEN_NETWORK, CLASSIC_TESTNET_NETWORK, CLASSIC_KOTTI_NETWORK, XDAI_NETWORK, MATIC_NETWORK, MUMBAI_NETWORK, BNB_NETWORK, BNB_TESTNET_NETWORK, BINANCE_NETWORK, BINANCE_TESTNET_NETWORK, KUCOIN_NETWORK, KUCOIN_TESTNET_NETWORK, } from './ethers.constants';
 export { getEthersToken, getContractToken, getSignerToken } from './ethers.utils';
 export { EthersSigner } from './ethers.signer';
 export { EthersContract } from './ethers.contract';
@@ -35,3 +35,4 @@ export * from '@ethersproject/wallet';
 export * from '@ethersproject/web';
 export * from '@ethersproject/wordlists';
 export { BscscanProvider } from '@ethers-ancillary/bsc';
+export { KccscanProvider } from './kcc';

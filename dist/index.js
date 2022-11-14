@@ -14,7 +14,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BscscanProvider = exports.sha256Pack = exports.keccak256Pack = exports.pack = exports.rlpEncode = exports.rlpDecode = exports.ContractFactory = exports.Contract = exports.BaseContract = exports.base64Encode = exports.base64Decode = exports.EthersContract = exports.EthersSigner = exports.getSignerToken = exports.getContractToken = exports.getEthersToken = exports.BINANCE_TESTNET_NETWORK = exports.BINANCE_NETWORK = exports.BNB_TESTNET_NETWORK = exports.BNB_NETWORK = exports.MUMBAI_NETWORK = exports.MATIC_NETWORK = exports.XDAI_NETWORK = exports.CLASSIC_KOTTI_NETWORK = exports.CLASSIC_TESTNET_NETWORK = exports.CLASSIC_MORDEN_NETWORK = exports.CLASSIC_NETWORK = exports.GOERLI_NETWORK = exports.KOVAN_NETWORK = exports.RINKEBY_NETWORK = exports.MORDEN_NETWORK = exports.UNSPECIFIED_NETWORK = exports.CLASSIC_MORDOR_NETWORK = exports.TESTNET_NETWORK = exports.ROPSTEN_NETWORK = exports.MAINNET_NETWORK = exports.InjectSignerProvider = exports.InjectContractProvider = exports.InjectEthersProvider = exports.EthersModule = void 0;
+exports.KccscanProvider = exports.BscscanProvider = exports.sha256Pack = exports.keccak256Pack = exports.pack = exports.rlpEncode = exports.rlpDecode = exports.ContractFactory = exports.Contract = exports.BaseContract = exports.base64Encode = exports.base64Decode = exports.EthersContract = exports.EthersSigner = exports.getSignerToken = exports.getContractToken = exports.getEthersToken = exports.KUCOIN_TESTNET_NETWORK = exports.KUCOIN_NETWORK = exports.BINANCE_TESTNET_NETWORK = exports.BINANCE_NETWORK = exports.BNB_TESTNET_NETWORK = exports.BNB_NETWORK = exports.MUMBAI_NETWORK = exports.MATIC_NETWORK = exports.XDAI_NETWORK = exports.CLASSIC_KOTTI_NETWORK = exports.CLASSIC_TESTNET_NETWORK = exports.CLASSIC_MORDEN_NETWORK = exports.CLASSIC_NETWORK = exports.GOERLI_NETWORK = exports.KOVAN_NETWORK = exports.RINKEBY_NETWORK = exports.MORDEN_NETWORK = exports.UNSPECIFIED_NETWORK = exports.CLASSIC_MORDOR_NETWORK = exports.TESTNET_NETWORK = exports.ROPSTEN_NETWORK = exports.MAINNET_NETWORK = exports.InjectSignerProvider = exports.InjectContractProvider = exports.InjectEthersProvider = exports.EthersModule = void 0;
 var ethers_module_1 = require("./ethers.module");
 Object.defineProperty(exports, "EthersModule", { enumerable: true, get: function () { return ethers_module_1.EthersModule; } });
 var ethers_decorators_1 = require("./ethers.decorators");
@@ -42,6 +42,8 @@ Object.defineProperty(exports, "BNB_NETWORK", { enumerable: true, get: function 
 Object.defineProperty(exports, "BNB_TESTNET_NETWORK", { enumerable: true, get: function () { return ethers_constants_1.BNB_TESTNET_NETWORK; } });
 Object.defineProperty(exports, "BINANCE_NETWORK", { enumerable: true, get: function () { return ethers_constants_1.BINANCE_NETWORK; } });
 Object.defineProperty(exports, "BINANCE_TESTNET_NETWORK", { enumerable: true, get: function () { return ethers_constants_1.BINANCE_TESTNET_NETWORK; } });
+Object.defineProperty(exports, "KUCOIN_NETWORK", { enumerable: true, get: function () { return ethers_constants_1.KUCOIN_NETWORK; } });
+Object.defineProperty(exports, "KUCOIN_TESTNET_NETWORK", { enumerable: true, get: function () { return ethers_constants_1.KUCOIN_TESTNET_NETWORK; } });
 var ethers_utils_1 = require("./ethers.utils");
 Object.defineProperty(exports, "getEthersToken", { enumerable: true, get: function () { return ethers_utils_1.getEthersToken; } });
 Object.defineProperty(exports, "getContractToken", { enumerable: true, get: function () { return ethers_utils_1.getContractToken; } });
@@ -91,4 +93,6 @@ __exportStar(require("@ethersproject/web"), exports);
 __exportStar(require("@ethersproject/wordlists"), exports);
 var bsc_1 = require("@ethers-ancillary/bsc");
 Object.defineProperty(exports, "BscscanProvider", { enumerable: true, get: function () { return bsc_1.BscscanProvider; } });
+var kcc_1 = require("./kcc");
+Object.defineProperty(exports, "KccscanProvider", { enumerable: true, get: function () { return kcc_1.KccscanProvider; } });
 //# sourceMappingURL=index.js.map

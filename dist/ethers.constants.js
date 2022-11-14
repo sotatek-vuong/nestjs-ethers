@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BINANCE_TESTNET_NETWORK = exports.BINANCE_NETWORK = exports.BNB_TESTNET_NETWORK = exports.BNB_NETWORK = exports.MUMBAI_NETWORK = exports.MATIC_NETWORK = exports.XDAI_NETWORK = exports.CLASSIC_KOTTI_NETWORK = exports.CLASSIC_TESTNET_NETWORK = exports.CLASSIC_MORDEN_NETWORK = exports.CLASSIC_NETWORK = exports.GOERLI_NETWORK = exports.KOVAN_NETWORK = exports.RINKEBY_NETWORK = exports.MORDEN_NETWORK = exports.UNSPECIFIED_NETWORK = exports.CLASSIC_MORDOR_NETWORK = exports.TESTNET_NETWORK = exports.ROPSTEN_NETWORK = exports.MAINNET_NETWORK = exports.HOMESTEAD_NETWORK = exports.DEFAULT_TOKEN = exports.ETHERS_MODULE_OPTIONS = exports.DECORATED_PREFIX = void 0;
+exports.KUCOIN_TESTNET_NETWORK = exports.KUCOIN_NETWORK = exports.BINANCE_TESTNET_NETWORK = exports.BINANCE_NETWORK = exports.BNB_TESTNET_NETWORK = exports.BNB_NETWORK = exports.MUMBAI_NETWORK = exports.MATIC_NETWORK = exports.XDAI_NETWORK = exports.CLASSIC_KOTTI_NETWORK = exports.CLASSIC_TESTNET_NETWORK = exports.CLASSIC_MORDEN_NETWORK = exports.CLASSIC_NETWORK = exports.GOERLI_NETWORK = exports.KOVAN_NETWORK = exports.RINKEBY_NETWORK = exports.MORDEN_NETWORK = exports.UNSPECIFIED_NETWORK = exports.CLASSIC_MORDOR_NETWORK = exports.TESTNET_NETWORK = exports.ROPSTEN_NETWORK = exports.MAINNET_NETWORK = exports.HOMESTEAD_NETWORK = exports.DEFAULT_TOKEN = exports.ETHERS_MODULE_OPTIONS = exports.DECORATED_PREFIX = void 0;
 exports.DECORATED_PREFIX = 'EthersJS';
 exports.ETHERS_MODULE_OPTIONS = 'EthersModuleOptions';
 exports.DEFAULT_TOKEN = 'default';
@@ -78,5 +78,13 @@ exports.BINANCE_NETWORK = {
 exports.BINANCE_TESTNET_NETWORK = {
     chainId: 0x61,
     name: 'bsc-testnet',
+};
+exports.KUCOIN_NETWORK = {
+    chainId: 0x141,
+    name: 'kcc-mainnet',
+};
+exports.KUCOIN_TESTNET_NETWORK = {
+    chainId: 0x142,
+    name: 'kcc-testnet',
 };
 //# sourceMappingURL=ethers.constants.js.map
