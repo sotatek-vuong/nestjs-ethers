@@ -4,6 +4,7 @@ import {
   getDefaultProvider as getDefaultBscProvider,
   getNetwork as getBscNetwork,
 } from '@ethers-ancillary/bsc'
+import { KccscanProvider, getDefaultProvider as getDefaultKccProvider, getNetwork as getKccNetwork } from './kcc'
 import {
   Provider as AbstractProvider,
   BaseProvider,
@@ -22,7 +23,14 @@ import {
 import { Provider } from '@nestjs/common'
 import { ConnectionInfo } from 'ethers/lib/utils'
 import { defer } from 'rxjs'
-import { ETHERS_MODULE_OPTIONS, MAINNET_NETWORK, BINANCE_NETWORK, BINANCE_TESTNET_NETWORK } from './ethers.constants'
+import {
+  ETHERS_MODULE_OPTIONS,
+  MAINNET_NETWORK,
+  BINANCE_NETWORK,
+  BINANCE_TESTNET_NETWORK,
+  KUCOIN_NETWORK,
+  KUCOIN_TESTNET_NETWORK,
+} from './ethers.constants'
 import { EthersContract } from './ethers.contract'
 import { EthersModuleOptions, EthersModuleAsyncOptions } from './ethers.interface'
 import { EthersSigner } from './ethers.signer'
@@ -40,6 +48,18 @@ function validateBscNetwork(network: Networkish) {
   return [BINANCE_NETWORK, BINANCE_TESTNET_NETWORK].includes(network)
 }
 
+function validateKccNetwork(network: Networkish) {
+  if (typeof network === 'number') {
+    return [KUCOIN_NETWORK.chainId, KUCOIN_TESTNET_NETWORK.chainId].includes(network)
+  }
+
+  if (typeof network === 'string') {
+    return [KUCOIN_NETWORK.name, KUCOIN_TESTNET_NETWORK.name].includes(network)
+  }
+
+  return [KUCOIN_NETWORK, KUCOIN_TESTNET_NETWORK].includes(network)
+}
+
 export async function createBaseProvider(options: EthersModuleOptions): Promise<BaseProvider | AbstractProvider> {
   const {
     network = MAINNET_NETWORK,
@@ -50,6 +70,7 @@ export async function createBaseProvider(options: EthersModuleOptions): Promise<
     cloudflare = false,
     bscscan,
     custom,
+    kccscan,
     quorum = 1,
     waitUntilIsConnected = true,
     useDefaultProvider = true,
@@ -57,9 +78,12 @@ export async function createBaseProvider(options: EthersModuleOptions): Promise<
 
   let providerNetwork: Network | undefined
   const isBscNetwork = validateBscNetwork(network)
+  const isKccNetwork = !isBscNetwork && validateKccNetwork(network)
 
   if (isBscNetwork) {
     providerNetwork = getBscNetwork(network) ?? undefined
+  } else if (isKccNetwork) {
+    providerNetwork = getKccNetwork(network) ?? undefined
   } else {
     providerNetwork = getNetwork(network)
   }
@@ -99,6 +123,10 @@ export async function createBaseProvider(options: EthersModuleOptions): Promise<
       providers.push(new BscscanProvider(providerNetwork, bscscan))
     }
 
+    if (kccscan) {
+      providers.push(new KccscanProvider(providerNetwork, kccscan))
+    }
+
     if (custom) {
       const customInfos: (ConnectionInfo | string)[] = !Array.isArray(custom) ? [custom] : custom
 
@@ -129,10 +157,16 @@ export async function createBaseProvider(options: EthersModuleOptions): Promise<
     )
   }
 
-  if (useDefaultProvider && isBscNetwork) {
-    const bscConfig: Record<string, string> = bscscan ? { bscscan } : {}
+  if (useDefaultProvider) {
+    if (isBscNetwork) {
+      const bscConfig: Record<string, string> = bscscan ? { bscscan } : {}
 
-    return getDefaultBscProvider(providerNetwork, bscConfig)
+      return getDefaultBscProvider(providerNetwork, bscConfig)
+    } else if (isKccNetwork) {
+      const kccConfig: Record<string, string> = kccscan ? { kccscan } : {}
+
+      return getDefaultKccProvider(providerNetwork, kccConfig)
+    }
   }
 
   /**

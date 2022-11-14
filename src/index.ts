@@ -29,6 +29,8 @@ export {
   BNB_TESTNET_NETWORK,
   BINANCE_NETWORK,
   BINANCE_TESTNET_NETWORK,
+  KUCOIN_NETWORK,
+  KUCOIN_TESTNET_NETWORK,
 } from './ethers.constants'
 export { getEthersToken, getContractToken, getSignerToken } from './ethers.utils'
 export { EthersSigner } from './ethers.signer'
@@ -77,3 +79,4 @@ export * from '@ethersproject/wallet'
 export * from '@ethersproject/web'
 export * from '@ethersproject/wordlists'
 export { BscscanProvider } from '@ethers-ancillary/bsc'
+export { KccscanProvider } from './kcc'

@@ -84,3 +84,13 @@ export const BINANCE_TESTNET_NETWORK: Network = {
   chainId: 0x61,
   name: 'bsc-testnet',
 }
+
+export const KUCOIN_NETWORK: Network = {
+  chainId: 0x141, // 321
+  name: 'kcc-mainnet',
+}
+
+export const KUCOIN_TESTNET_NETWORK: Network = {
+  chainId: 0x142, // 322
+  name: 'kcc-testnet',
+}
