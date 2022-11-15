@@ -1,6 +1,6 @@
 {
   "name": "nestjs-ethers",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "The ethers.js library for NestJS",
   "author": "Blockcoders Engineering <hello@blockcoders.io>",
   "license": "Apache",
@@ -13,7 +13,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc --p tsconfig.build.json",
-    "prepare": "npm run build",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test,__tests__}/**/*.ts\" --fix",
     "lint:ci": "eslint \"{src,apps,libs,test,__tests__}/**/*.ts\"",
